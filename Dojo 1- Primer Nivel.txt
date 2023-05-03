@@ -1,0 +1,61 @@
+#define LED_ROJO1 12
+#define LED_ROJO2 11
+#define LED_AMARILLO1 10
+#define LED_AMARILLO2 9
+#define LED_VERDE1 8
+#define LED_VERDE2 7
+#define BUZZER 6
+
+void encederLed(int led, int led2, int tiempoEncendido);
+void apagarLed(int led, int led2, int tiempoApagado);
+
+int tiempoVerde = 5000;
+int tiempoAmarillo = 3000;
+int tiempoRojo = 5000;
+int buzzerDuracion = 250; 
+
+void setup()
+{
+  for(int i = 6; i <=12; i++)
+  {
+    pinMode(i,OUTPUT);
+  }
+}
+
+
+void loop()
+{
+  encenderLed(LED_VERDE1,LED_VERDE2,tiempoVerde);
+  apagarLed(LED_VERDE1,LED_VERDE2);
+  
+  encenderLed(LED_AMARILLO1,LED_AMARILLO2,tiempoAmarillo);
+  apagarLed(LED_AMARILLO1,LED_AMARILLO2);
+  
+  digitalWrite(LED_ROJO1, HIGH);
+  digitalWrite(LED_ROJO2, HIGH);
+  
+  for (int i = 0; i < 10; i++) { 
+    tone(BUZZER, 1000, buzzerDuracion);
+    delay(buzzerDuracion);
+    noTone(BUZZER);
+    delay(buzzerDuracion);
+  }
+  
+  apagarLed(LED_ROJO1,LED_ROJO2);
+  noTone(BUZZER);
+   
+}
+
+
+void encenderLed(int led, int led2, int tiempoEncendido)
+  {
+  digitalWrite(led, HIGH);
+  digitalWrite(led2, HIGH);
+  delay(tiempoEncendido);
+  }
+  
+void apagarLed(int led, int led2)
+  {
+  digitalWrite(led, LOW);
+  digitalWrite(led2, LOW);
+  }
